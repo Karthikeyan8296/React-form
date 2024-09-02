@@ -18,7 +18,7 @@ const ExpenseList = ({ expenses, onDeleted }: Props) => {
     <table className="table table-borderd">
       <thead>
         <tr>
-          <th>Discription</th>
+          <th>Description</th>
           <th>Amount</th>
           <th>Category</th>
           <th></th>

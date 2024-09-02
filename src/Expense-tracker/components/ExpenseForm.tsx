@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const schema = z.object({
-  discription: z
+  description: z
     .string()
     .min(3, { message: "Description should be atleast 3 character" })
     .max(50),
@@ -19,10 +19,15 @@ const schema = z.object({
 
 type ExpenseFormData = z.infer<typeof schema>;
 
-const ExpenseForm = () => {
+interface Props {
+  onSubmit: (data: ExpenseFormData) => void;
+}
+
+const ExpenseForm = ({ onSubmit }: Props) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ExpenseFormData>({ resolver: zodResolver(schema) });
 
@@ -32,19 +37,24 @@ const ExpenseForm = () => {
         <strong>Calculate your Expenses</strong>
       </h3>
 
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
+      <form
+        onSubmit={handleSubmit((data) => {
+          onSubmit(data);
+          reset();
+        })}
+      >
         <div className="mb-3">
           <label htmlFor="description" className="form-lable">
             Description
           </label>
           <input
-            {...register("discription")}
+            {...register("description")}
             id="description"
             type="text"
             className="form-control"
           />
-          {errors.discription && (
-            <p className="text-danger">{errors.discription.message}</p>
+          {errors.description && (
+            <p className="text-danger">{errors.description.message}</p>
           )}
         </div>
 

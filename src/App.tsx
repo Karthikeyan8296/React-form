@@ -3,7 +3,6 @@ import ExpenseForm from "./Expense-tracker/components/ExpenseForm";
 import ExpenseList from "./Expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./Expense-tracker/components/ExpenseFilter";
 
-
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -19,7 +18,11 @@ function App() {
     : expenses;
   return (
     <>
-      <ExpenseForm />
+      <ExpenseForm
+        onSubmit={(expense) =>
+          setExpenses([...expenses, { ...expense, id: expenses.length + 1 }])
+        }
+      />
       <div className="mb-3"></div>
       <ExpenseFilter
         onSelectCategory={(category) => setSelectedCategory(category)}
