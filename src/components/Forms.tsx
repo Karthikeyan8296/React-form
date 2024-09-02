@@ -1,31 +1,34 @@
 import { useRef } from "react";
+import { FieldValues, useForm } from "react-hook-form";
 
 const Form = () => {
-  const nameRef = useRef<HTMLInputElement>(null);
-  const ageRef = useRef<HTMLInputElement>(null);
-  const person = { name: "", age: 0 };
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data: FieldValues) => console.log(data);
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        if (nameRef.current !== null) person.name = nameRef.current.value;
-        if (ageRef.current !== null) person.age = parseInt(ageRef.current.value); //parseInt - convert string into number
-        console.log(person);
-      }}
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
         <label htmlFor="name" className="form-lable">
           Name uh sollu
         </label>
-        <input ref={nameRef} id="name" type="text" className="form-control" />
+        <input
+          {...register("name")} //react hook form//
+          id="name"
+          type="text"
+          className="form-control"
+        />
       </div>
 
       <div className="mb-3">
         <label htmlFor="age" className="form-lable">
           Age enna?
         </label>
-        <input ref={ageRef} id="age" type="number" className="form-control" />
+        <input
+          {...register("age")}  //react hook form//
+          id="age"
+          type="number"
+          className="form-control"
+        />
       </div>
 
       <button type="submit" className="btn btn-primary">
