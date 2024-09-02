@@ -1,7 +1,6 @@
-
 const Form = () => {
   return (
-    <form action="">
+    <form onSubmit={() => console.log("Submitted")}>
       <div className="mb-3">
         <label htmlFor="name" className="form-lable">Name uh sollu</label>
         <input id="name" type="text" className="form-control" />
@@ -12,7 +11,7 @@ const Form = () => {
         <input id="age" type="number" className="form-control" />
       </div>
 
-      <button type="button" className="btn btn-primary">Submit</button>
+      <button type="submit" className="btn btn-primary">Submit</button>
     </form>
   );
 };
